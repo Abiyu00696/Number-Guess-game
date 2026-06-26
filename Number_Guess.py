@@ -38,6 +38,12 @@ def game(level, score_multi, chance):
         except ValueError:
             print("Please Enter Value")
     
+    print('─'*20)
+    print("Game Over")
+    print(f"Ther correct number was {random_number}") 
+    print('─'*20)
+
+    return 0   
 
 
 
@@ -68,7 +74,9 @@ while running :
                 except Exception as e:
                     print(f"Error: {e}")   
             case 2:
+                print('─'*20)
                 print("Score: ", score)
+                print('─'*20)
             case 3:
                 print("exiting...")
                 running = False
