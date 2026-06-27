@@ -13,7 +13,7 @@ Number Guess Game is a simple game where the player tries to find a hidden numbe
 - Random number selection
 - Guess feedback
 - Easy gameplay
-
+- Store the Score
 ## Requirements
 - python 
 

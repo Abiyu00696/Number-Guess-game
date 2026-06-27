@@ -1,4 +1,6 @@
+from pathlib import Path
 import random
+
 def welcome():
     print("Welcome")
     print("This is Number Guessing game\n")
@@ -42,23 +44,34 @@ def game(level, score_multi, chance):
     print("Game Over")
     print(f"Ther correct number was {random_number}") 
     print('─'*20)
-
-    return 0   
-
-
+    return 0 
 
 running = True          
 score = 0
+user_name = ''  
+file_name = Path("Score.txt")               
 while running :
+    if not file_name.is_file():
+        with open(file_name, "a") as f:
+            name = 'Name'
+            score_label = 'Score'
+            f.write(f"┌{"-"*43}┐\n")
+            f.write(f"|{'':<15} Score Board {' ':<15}|\n")
+            f.write(f"├{'-'*20}-+-{'-'*20}┤\n")
+            f.write(f"|{name:<20} | {score_label:<20}|\n")
+            f.write(f"├{'-'*20}-+-{'-'*20}┤\n")
+
+            
     welcome()
     try:
         choice = int(input("Choice: "))
         match choice:
             case 1:
-                
+                user_name = input("Enter Your Name: ")
+
                 print("1. Easy")
                 print("2. Medium")
-                print("2. Hard")
+                print("3. Hard")
                 try:
                     choice_inside = int(input("Choice: "))
                     match choice_inside:
@@ -70,13 +83,16 @@ while running :
                             score = game(level='Hard', score_multi=5,chance=3)
                         case _:
                             print("Invalid Choice")
-                            
                 except Exception as e:
-                    print(f"Error: {e}")   
+                    print(f"Error: {e}")
+
+                with open("Score.txt", "a") as file:
+                    file.write(f"|{user_name:<20} | {score:<20}|\n")
+
             case 2:
-                print('─'*20)
-                print("Score: ", score)
-                print('─'*20)
+                with open(file_name, 'r') as file:
+                    score_text = file.read()
+                    print(score_text)
             case 3:
                 print("exiting...")
                 running = False
